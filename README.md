@@ -44,15 +44,17 @@ service ServerReflection {
 ```
 > #### construction notes
 > ##### nuget:
-> - **Grpc.AspNetCore** for basic functionality, compiling proto files, setting up the grpc service
-> - **Grpc.AspNetCore.Server.Reflection** grpcurl wants reflection, otherwise without metadata, it won't work
+> - **Grpc.AspNetCore**  
+> basic functionality, compiling proto files, setting up the grpc service
+> - **Grpc.AspNetCore.Server.Reflection**  
+> _grpcurl_ wants reflection, otherwise without metadata, it won't work
 
 > ##### 2 ports: 
-> - webapi (REST, Http1) runs on 8080
-> - grpc (http2) runs on 8081
-> - we have disabled TLS for the grpc port 8081 when running in a devenv
+> - **webapi** (REST, Http1) runs on 8080
+> - **grpc** (http2) runs on 8081  
+> we have disabled TLS for the grpc port 8081 when running in a devenv
 > 
-> ##### add grpc and reflection to the service collection
+> ##### add grpc and reflection to the service collection:
 ```
 builder.Services.AddGrpc();
 builder.Services.AddGrpcReflection();
