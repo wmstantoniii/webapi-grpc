@@ -50,10 +50,14 @@ service ServerReflection {
 > _grpcurl_ wants reflection, otherwise without metadata, it won't work
 
 > ##### 2 ports: 
+> 
 > - **webapi** (REST, Http1) runs on 8080
 > - **grpc** (http2) runs on 8081  
 > we have disabled TLS for the grpc port 8081 when running in a devenv
-> 
+> ###### looks like we may need 2 poirts, for .net6/C#.    
+> ###### golang is better in this respect 
+> https://stackoverflow.com/questions/75562400/running-rest-api-and-grpc-simultanously-using-asp-net-core
+
 > ##### add grpc and reflection to the service collection:
 ```
 builder.Services.AddGrpc();
