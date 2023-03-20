@@ -41,7 +41,24 @@ grpc.reflection.v1alpha.ServerReflection is a service:
 service ServerReflection {
   rpc ServerReflectionInfo ( stream .grpc.reflection.v1alpha.ServerReflectionRequest ) returns ( stream .grpc.reflection.v1alpha.ServerReflectionResponse );
 }
-
-
 ```
+> #### construction notes
+> ##### nuget:
+> - **Grpc.AspNetCore** for basic functionality, compiling proto files, setting up the grpc service
+> - **Grpc.AspNetCore.Server.Reflection** grpcurl wants reflection, otherwise without metadata, it won't work
 
+> ##### 2 ports: 
+> - webapi (REST, Http1) runs on 8080
+> - grpc (http2) runs on 8081
+> - we have disabled TLS for the grpc port 8081 when running in a devenv
+> 
+> ##### add grpc and reflection to the service collection
+```
+builder.Services.AddGrpc();
+builder.Services.AddGrpcReflection();
+```
+> ##### Configure the HTTP request pipeline.
+```
+app.MapGrpcService<GreeterService>();
+app.MapGrpcReflectionService();
+```

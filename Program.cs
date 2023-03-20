@@ -19,8 +19,11 @@ var webapiPort = 8080;
 var webapiProtocols = HttpProtocols.Http1;
 
 var grpcPort = 8081;
+
+// hack for mac: Setup HTTP/2 endpoint without TLS
+// https://learn.microsoft.com/en-us/aspnet/core/grpc/troubleshoot?view=aspnetcore-7.0#unable-to-start-aspnet-core-grpc-app-on-macos
 var grpcProtocols = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Development"
-    ? HttpProtocols.Http2 // hack for mac: Setup HTTP/2 endpoint without TLS
+    ? HttpProtocols.Http2
     : HttpProtocols.Http1AndHttp2;
 
 builder.WebHost.ConfigureKestrel(options =>
