@@ -17,7 +17,7 @@ builder.Services.AddSwaggerGen();
 
 var webapiPort = 8080;
 var webapiProtocols = HttpProtocols.Http1;
-
+ 
 var grpcPort = 8081;
 
 // hack for mac: Setup HTTP/2 endpoint without TLS
