@@ -1,11 +1,13 @@
 # webapi grpc mashup
-> Work in progress.   I'm writing this to teach myself .NET core on an open source platform (VSCode on the Mac).  The application was created by combining apps generated from dotnet templates:
+> Work in progress.   I'm writing this to relearm .NET core on an open source platform (VSCode on the Mac).  
+> The application was created by combining apps generated from dotnet templates:
+> 
 > - dotnet new grpc
 > - dotnet new webapi
 >
 > ### TODO: build a unified template
 
-> ### to use this code on MacOS
+> ### to use this code on MacOS (obsolete doc, fixme)
 > - brew install grpcurl
 > - clone the repo
 > - open webapi-gprc.csproj in Rider
