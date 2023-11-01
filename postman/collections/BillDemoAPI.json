@@ -1,0 +1,98 @@
+{
+	"info": {
+		"_postman_id": "3d17d3a2-6b9e-457f-9ae9-b7e02f9698ab",
+		"name": "Bill Demo API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30749188"
+	},
+	"item": [
+		{
+			"name": "Get Weather Forecast",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"function isTomorrow (date) {  ",
+							"    if (!(date instanceof Date)) {",
+							"        throw new Error('Invalid argument: you must provide a \"date\" instance')",
+							"    }",
+							"",
+							"    const tomorrow = new Date()",
+							"    tomorrow.setDate(tomorrow.getDate() + 1)",
+							"",
+							"    return date.getDate() === tomorrow.getDate() &&",
+							"         date.getMonth() === tomorrow.getMonth() &&",
+							"         date.getFullYear() === tomorrow.getFullYear()",
+							"}",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"const forecasts = pm.response.json();",
+							"pm.test(\"forecasts are defined\", () => {",
+							"    pm.expect(forecasts).to.be.an('array');",
+							"});",
+							"",
+							"pm.test(\"forecasts are non-empty\", () => {",
+							"    pm.expect(forecasts.length).to.be.above(0);",
+							"});",
+							"",
+							"const forecastForTomorrow = forecasts[0];",
+							"pm.test(\"forecast for tomorrow is an object\", () => {",
+							"    pm.expect(forecastForTomorrow).to.be.an('object');",
+							"});",
+							"",
+							"pm.test(\"forecast for tomorrow is a weather forecast\", () => {",
+							"    pm.expect(forecastForTomorrow).to.have.all.keys('date', 'temperatureC', 'temperatureF', 'summary');",
+							"});",
+							"",
+							"pm.test(\"forecast for tomorrow is for tomorrow\", () => {",
+							"    var d = new Date(Date.parse(forecastForTomorrow[\"date\"]));",
+							"    pm.expect(isTomorrow(d)).to.eql(true);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://{{baseUrl}}/WeatherForecast",
+					"protocol": "http",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"WeatherForecast"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
